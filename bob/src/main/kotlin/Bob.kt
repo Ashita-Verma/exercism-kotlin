@@ -1,10 +1,15 @@
 object Bob {
     fun hey(input: String): String {
+        val statement = input.trim()
         return when  {
-            input.matches(Regex("^[A-Z ]+(?<=\\?)$")) -> "Calm down, I know what I'm doing!"
-            input.matches(Regex("^(?!.*\\?)[A-Z ]+$")) -> "Whoa, chill out!"
-            input.endsWith('?') -> "Sure."
-            input.isEmpty() -> "Fine. Be that way!"
+            statement.isEmpty() -> "Fine. Be that way!"
+            statement.contains(Regex("[A-Z]+")) && statement.compareTo(statement.uppercase()) == 0 -> {
+                if (statement.endsWith("?"))
+                    "Calm down, I know what I'm doing!"
+                else
+                    "Whoa, chill out!"
+            }
+            statement.endsWith("?") -> "Sure."
             else -> "Whatever."
         }
     }
